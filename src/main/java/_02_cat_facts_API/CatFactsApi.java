@@ -4,6 +4,8 @@ import _02_cat_facts_API.data_transfer_objects.CatWrapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import _01_intro_to_APIs.data_transfer_objects.Result;
 import reactor.core.publisher.Mono;
 
 /*
@@ -37,12 +39,19 @@ public class CatFactsApi {
 
 
         //Collect the response from the Mono object
-
+    	 Mono<String> stringMono = webClient
+         		.get()
+           
+                 .retrieve()
+                 .bodyToMono(String.class);
 
         /*
         Print out the actual JSON response -
         this is what you will input into jsonschema2pojo.com
          */
+    	 String response = stringMono.block();
+
+         System.out.println(response);
 
 
         /*
@@ -60,7 +69,15 @@ public class CatFactsApi {
 
         //Make the request, saving the response in an object of the type that you just created in your
         //data_transfer_objects package (CatWrapper)
+    	
+    	//not working -----------
+    	//Mono<String> CatWrapper = webClient {
+        //        .get()
+        //        .retrieve()
+        //        .bodyToMono(Result[].class);
 
+        //return CatWrapper.block();
+    	
         //Use block() to collect the response into a java object using the class you just created
 
         //return the Object
@@ -71,7 +88,8 @@ public class CatFactsApi {
 
     public String findCatFact(){
         //use the getCatFact method to retrieve a cat fact
-
+    	getCatFact();
+    	
         //return the first (and only) String in the Arraylist of data in the response
         return null;
     }
