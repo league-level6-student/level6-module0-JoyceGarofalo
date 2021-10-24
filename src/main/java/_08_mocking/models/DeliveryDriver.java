@@ -45,7 +45,7 @@ public class DeliveryDriver {
         this.currentlyOnDelivery = currentlyOnDelivery;
     }
 
-    public boolean completeDelivery(Order order) {
+	public boolean completeDelivery(Order order) {
         //Here is some code that completes the delivery
         return new Random().nextBoolean();
     }
